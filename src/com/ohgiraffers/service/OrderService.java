@@ -6,21 +6,20 @@ import com.ohgiraffers.dto.MemberDTO;
 
 import java.util.Scanner;
 
-
 public class OrderService {
-    Scanner sc = new Scanner(System.in);
-    MainRepository mr = new MainRepository();
+    Scanner scanner = new Scanner(System.in);
+    MainRepository mainRepository = new MainRepository();
 
     public String serviceView(String inputSel) {
-        return mr.selectBookPrint(inputSel);
+        return mainRepository.selectBookPrint(inputSel);
     }
 
     public String serviceRegist(BookDTO bookDTO) {
-        return mr.registerBook(bookDTO);
+        return mainRepository.registerBook(bookDTO);
     }
 
     public String serviceOverPrint() {
-        return mr.bookOverPrint();
+        return mainRepository.bookOverPrint();
     }
 
     public String serviceModify(int sel) {
@@ -28,7 +27,7 @@ public class OrderService {
             return "번호를 확인하렴.";
         int num = 0;
         System.out.println("수정을 원하시는 정보를 입력 해주세요. \nex) 제목 저자 가격");
-        String input = sc.nextLine();
+        String input = scanner.nextLine();
         if (input.equals("제목"))
             num = 1;
         else if (input.equals("저자"))
@@ -38,26 +37,26 @@ public class OrderService {
         else
             return "글자를 확인하여 다시 쳐주세요.";
         System.out.println("덮어쓸 정보를 입력해주세요.");
-        String input2 = sc.nextLine();
+        String input2 = scanner.nextLine();
 
-        return mr.bookModify(sel, num, input2);
+        return mainRepository.bookModify(sel, num, input2);
     }
 
     public String serviceDelete(int sel) {
-        return mr.bookDelete(sel);
+        return mainRepository.bookDelete(sel);
     }
 
     public String serviceMemRegist(MemberDTO memberDTO) {
-        return mr.registerMember(memberDTO);
+        return mainRepository.registerMember(memberDTO);
     }
 
     public String serviceMemberView(String inputSel) {
-        return mr.memSelectPrint(inputSel);
+        return mainRepository.memSelectPrint(inputSel);
     }
 
     public String serviceMemModify(String name) {
         System.out.println("수정을 원하시는 정보를 입력 해주세요. \nex)이름 주소 번호 성별");
-        String input = sc.nextLine();
+        String input = scanner.nextLine();
         int num = 0;
         if (input.equals("이름"))
             num = 1;
@@ -70,32 +69,32 @@ public class OrderService {
         else
             return "글자를 확인하여 다시 쳐주세요.";
         System.out.println("변경하실 정보를 입력해주세요.");
-        String input2 = sc.nextLine();
-        return mr.memModify(num, name, input2);
+        String input2 = scanner.nextLine();
+        return mainRepository.memModify(num, name, input2);
     }
 
     public String serviceMemDelete(int sel) {
-        return mr.memDelete(sel);
+        return mainRepository.memDelete(sel);
     }
 
     public String serviceMemOverPrint() {
-        return mr.memOverPrint();
+        return mainRepository.memOverPrint();
     }
 
     public String serviceMemincome(int income, int num) {
-        return mr.trincome(income, num);
+        return mainRepository.trincome(income, num);
     }
 
     public int serviceRental(String name) {
-        return mr.memRental(name);
+        return mainRepository.memRental(name);
     }
 
     public String serviceBookRental(int bookNum, int memNum) {
-        return mr.bookRental(bookNum, memNum);
+        return mainRepository.bookRental(bookNum, memNum);
     }
 
     public String serviceBookReturn(int num) {
-        return mr.bookReturn(num);
+        return mainRepository.bookReturn(num);
     }
 
 }

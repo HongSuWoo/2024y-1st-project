@@ -1,8 +1,7 @@
 package com.ohgiraffers.dto;
 
 
-public class BookDTO
-{
+public class BookDTO {
     private int bookNum;
     private String bookName; //1
     private String bookAuthor; //2
@@ -12,19 +11,17 @@ public class BookDTO
     private int bookRentalCost;
 
     int bookRentCost;
-    public BookDTO(String bookName, String bookAuthor, int bookPrice)
-    {
+
+    public BookDTO(String bookName, String bookAuthor, int bookPrice) {
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
         this.bookPrice = bookPrice;
-        if(this.bookPrice>=8000)
-            this.bookRentalCost =1000;
+        if (this.bookPrice >= 8000)
+            this.bookRentalCost = 1000;
         else
-            this.bookRentalCost =400;
+            this.bookRentalCost = 400;
 
     }
-
-
 
     public void setBookNum(int num) {
 
@@ -72,12 +69,9 @@ public class BookDTO
         this.bookRent = bookRent;
     }
 
-
     public int getBookRentalCost() {
         return bookRentalCost;
     }
-
-
 
     @Override
     public String toString() {

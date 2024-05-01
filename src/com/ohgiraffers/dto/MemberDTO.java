@@ -1,7 +1,6 @@
 package com.ohgiraffers.dto;
 
-public class MemberDTO
-{
+public class MemberDTO {
     private int memberNum;
 
     public int getMemberNum() {
@@ -20,10 +19,9 @@ public class MemberDTO
     private int memberMoney;
 
 
-    public MemberDTO(String memberName, String memberAdress, String memberPhone, String memberGender)
-    {
+    public MemberDTO(String memberName, String memberAddress, String memberPhone, String memberGender) {
         this.memberName = memberName;
-        this.memberAdress = memberAdress;
+        this.memberAdress = memberAddress;
         this.memberPhone = memberPhone;
         this.memberGender = memberGender;
     }
@@ -79,11 +77,11 @@ public class MemberDTO
 
     @Override
     public String toString() {
-        return "회원정보 " +memberNum +" "+
-                "이름 = " + memberName  +
-                " 주소 = " + memberAdress  +
-                " 번호 = " + memberPhone  +
-                " 대여목록 = " + memberRentalList  +
+        return "회원정보 " + memberNum + " " +
+                "이름 = " + memberName +
+                " 주소 = " + memberAdress +
+                " 번호 = " + memberPhone +
+                " 대여목록 = " + memberRentalList +
                 " 성별 = " + memberGender +
                 " 금액 = " + memberMoney +
                 "\n";

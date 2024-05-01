@@ -1,6 +1,6 @@
 package com.ohgiraffers;
 
-import com.ohgiraffers.order.controller.OrderController;
+import com.ohgiraffers.controller.OrderController;
 
 import java.util.InputMismatchException;
 
@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Application {
 
     public static void main(String[] args) {
-        OrderController oc = new OrderController();
-        Scanner sc = new Scanner(System.in);
+        OrderController orderController = new OrderController();
+        Scanner scanner = new Scanner(System.in);
         boolean onIs = true;
-        int input;
+        int input = 0;
 
         while (onIs) {
             System.out.println("=======도서 관리 프로그램=======");
@@ -24,27 +24,26 @@ public class Application {
             System.out.print("메뉴를 선택해 주세요: ");
 
             try {
-                input = sc.nextInt();
-                sc.nextLine();
+                input = scanner.nextInt();
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("숫자를 입력해주세요 !!!");
-                sc.nextLine();
-                continue;
+                scanner.nextLine();
             }
 
             switch (input) {
                 case 1 -> {
                     System.out.print("회원이름을 입력 해주세요: ");
-                    oc.rentalService();
+                    orderController.rentalService();
                 }
                 case 2 -> {
-                    oc.memberService();
+                    orderController.memberService();
                 }
                 case 3 -> {
-                    oc.bookService();
+                    orderController.bookService();
                 }
                 case 4 -> {
-                    oc.returnBook();
+                    orderController.returnBook();
                 }
                 case 9 -> {
                     onIs = false;
