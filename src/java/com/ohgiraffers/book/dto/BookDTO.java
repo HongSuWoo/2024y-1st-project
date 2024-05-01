@@ -1,4 +1,4 @@
-package com.ohgiraffers.dto;
+package dto;
 
 
 public class BookDTO {

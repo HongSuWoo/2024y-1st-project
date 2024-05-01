@@ -1,9 +1,9 @@
-package com.ohgiraffers.controller;
+package controller;
 
 
-import com.ohgiraffers.dto.BookDTO;
-import com.ohgiraffers.dto.MemberDTO;
-import com.ohgiraffers.service.OrderService;
+import dto.BookDTO;
+import dto.MemberDTO;
+import service.OrderService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

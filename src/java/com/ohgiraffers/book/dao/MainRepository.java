@@ -1,7 +1,7 @@
-package com.ohgiraffers.dao;
+package dao;
 
-import com.ohgiraffers.dto.BookDTO;
-import com.ohgiraffers.dto.MemberDTO;
+import dto.BookDTO;
+import dto.MemberDTO;
 
 import java.util.ArrayList;
 import java.util.Scanner;

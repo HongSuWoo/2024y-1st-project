@@ -1,8 +1,8 @@
-package com.ohgiraffers.service;
+package service;
 
-import com.ohgiraffers.dao.MainRepository;
-import com.ohgiraffers.dto.BookDTO;
-import com.ohgiraffers.dto.MemberDTO;
+import dao.MainRepository;
+import dto.BookDTO;
+import dto.MemberDTO;
 
 import java.util.Scanner;
 

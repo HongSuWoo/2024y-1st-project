@@ -1,6 +1,4 @@
-package com.ohgiraffers;
-
-import com.ohgiraffers.controller.OrderController;
+import controller.OrderController;
 
 import java.util.InputMismatchException;
 

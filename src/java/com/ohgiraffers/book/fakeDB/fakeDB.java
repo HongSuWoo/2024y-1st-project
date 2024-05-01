@@ -1,8 +1,8 @@
-package com.ohgiraffers.fakeDB;
+package fakeDB;
 
-import com.ohgiraffers.dto.BookDTO;
-import com.ohgiraffers.dto.MemberDTO;
-import com.ohgiraffers.service.OrderService;
+import dto.BookDTO;
+import dto.MemberDTO;
+import service.OrderService;
 
 public class fakeDB {
     OrderService orderService = new OrderService();
