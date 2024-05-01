@@ -5,7 +5,7 @@ import com.ohgiraffers.dto.MemberDTO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BookRepository
+public class MainRepository
 {
     private final ArrayList<MemberDTO> memberDB = new ArrayList<>();
     private final ArrayList<BookDTO> bookDB = new ArrayList<>();

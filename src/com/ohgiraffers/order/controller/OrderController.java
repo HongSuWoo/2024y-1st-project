@@ -5,16 +5,17 @@ import com.ohgiraffers.dto.BookDTO;
 import com.ohgiraffers.dto.MemberDTO;
 import com.ohgiraffers.service.OrderService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class OrderController {
     OrderService os = new OrderService();
     Scanner sc = new Scanner(System.in);
-    String bookName, bookAuthor, inputSel, result,memName,memAdress,memPhone,memGen;
+    String bookName, bookAuthor, inputSel, result, memName, memAddress, memPhone, memGen;
     int bookPrice, input, inputNum;
+
     public void bookService() {
-        int input;
-        //도서 전체 열람
+
         System.out.println();
         System.out.println("-----도서 관리 메뉴-------");
         System.out.println("1. 도서 검색");
@@ -22,16 +23,23 @@ public class OrderController {
         System.out.println("3. 도서 수정");
         System.out.println("4. 도서 삭제");
         System.out.println("5. 도서 전체");
-        System.out.print("원하시는 메뉴를 선택해주세요 -> ");
-        input = sc.nextInt();
-        sc.nextLine();
+        System.out.print("메뉴를 선택해주세요: ");
+
+        try {
+            input = sc.nextInt();
+            sc.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("숫자를 입력해주세요 !!!");
+            sc.nextLine();
+        }
+
         switch (input) {
-            case 1:
+            case 1 -> {
                 System.out.println("검색 하실 도서 번호나 도서 제목을 입력해주세요.");
                 inputSel = sc.nextLine();
-                result = os.servcieView(inputSel);
-                break;
-            case 2:
+                result = os.serviceView(inputSel);
+            }
+            case 2 -> {
                 System.out.println("도서 제목을 입력해주세요.");
                 bookName = sc.nextLine();
                 System.out.println("도서 저자를 입력해주세요.");
@@ -44,41 +52,38 @@ public class OrderController {
                 }
                 BookDTO bookDTO = new BookDTO(bookName, bookAuthor, bookPrice);
                 result = os.serviceRegist(bookDTO);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 System.out.println("수정 하실 책의 일련번호 를 입력해주세요.");
                 inputNum = sc.nextInt();
                 sc.nextLine();
-                if (inputNum <= 0)
-                    {
+                if (inputNum <= 0) {
                     System.out.println("번호를 확인해 주세요.");
                     break;
-                    }
+                }
                 result = os.serviceModify(inputNum);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 System.out.println("삭제 하실 번호를 입력해주세요.");
                 inputNum = sc.nextInt();
-                if (inputNum <= 0)
-                    {
+                if (inputNum <= 0) {
                     System.out.println("번호를 확인해 주세요.");
                     break;
-                    }
+                }
                 result = os.serviceDelete(inputNum);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 result = os.serviceOverPrint();
-                break;
-            default:
-                System.out.println("Error");
-                break;
+            }
+            default -> {
+                System.out.println("잘못된 입력입니다!");
+            }
         }
         System.out.println(result);
     }
 
 
-    public void basicBookRegist()
-    {
+    public void basicBookRegist() {
         String[] basicBook = new String[9];
         basicBook[0] = ("개미,베르나르,10000");
         basicBook[1] = ("나무,김모성,10000");
@@ -90,8 +95,7 @@ public class OrderController {
         basicBook[7] = ("헌터x헌터,욕욕욕,4000");
         basicBook[8] = ("마검 전생,김재한,10000");
 
-        for (int i = 0; i < basicBook.length; i++)
-        {
+        for (int i = 0; i < basicBook.length; i++) {
             String[] bookData = basicBook[i].split(",");
             String name = bookData[0];
             String author = bookData[1];
@@ -101,8 +105,8 @@ public class OrderController {
             os.serviceRegist(bookDTO);
         }
     }
-    public void basicMemberRegist()
-    {
+
+    public void basicMemberRegist() {
         String[] basicMember = new String[9];
         basicMember[0] = ("홍서우,서울,010-9592-6660,남");
         basicMember[1] = ("김효주,서울,010-1111-1111,여");
@@ -113,8 +117,7 @@ public class OrderController {
         basicMember[6] = ("제이나,테라모어,010-6666-6666,여");
         basicMember[7] = ("멀록킹,아옳옳,010-7777-7777,남");
         basicMember[8] = ("바리안,스톰윈드,010-8888-8888,남");
-        for (int i = 0; i < basicMember.length; i++)
-        {
+        for (int i = 0; i < basicMember.length; i++) {
             String[] memberData = basicMember[i].split(",");
             String name = memberData[0];
             String address = memberData[1];
@@ -125,8 +128,8 @@ public class OrderController {
             os.serviceMemRegist(memberDTO);
         }
     }
-    public void memberService()
-    {
+
+    public void memberService() {
         int input;
         System.out.println();
         System.out.println("-----멤버 관리 메뉴-------");
@@ -149,12 +152,12 @@ public class OrderController {
                 System.out.println("등록하실 회원 이름을 입력해주세요.");
                 memName = sc.nextLine();
                 System.out.println("주소를 입력해 주세요..");
-                memAdress = sc.nextLine();
+                memAddress = sc.nextLine();
                 System.out.println("핸드폰 번호를 입력해주세요.");
                 memPhone = sc.nextLine();
                 System.out.println("성별을 입력 해주세요.");
                 memGen = sc.nextLine();
-                MemberDTO memberDTO = new MemberDTO(memName,memAdress,memPhone,memGen);
+                MemberDTO memberDTO = new MemberDTO(memName, memAddress, memPhone, memGen);
                 result = os.serviceMemRegist(memberDTO);
                 break;
             case 3:
@@ -165,8 +168,7 @@ public class OrderController {
             case 4:
                 System.out.println("삭제 하실 번호를 입력해주세요.");
                 inputNum = sc.nextInt();
-                if (inputNum <= 0)
-                {
+                if (inputNum <= 0) {
                     System.out.println("번호를 확인해 주세요.");
                     break;
                 }
@@ -181,40 +183,36 @@ public class OrderController {
         }
         System.out.println(result);
     }
-    public void rentalService()
-    {
-        String rental,result="";
-        int intToken,token;
+
+    public void rentalService() {
+        String rental, result = "";
+        int intToken, token;
         memName = sc.nextLine();
         token = os.serviceRental(memName);
-        if(token==-1)
+        if (token == -1)
             System.out.println("회원 이름이 잘못 되었습니다.");
-        else
-        {
+        else {
             System.out.println("빌리실 책의 바코드 또는 책의 번호를 눌러주세요." + token);
             System.out.println("충전을 하실경우 $를 눌러주세요.");
             rental = sc.nextLine();
             if (rental.equals("@"))
                 System.out.println("바코드 클래스 이행");
-            else if (rental.equals("$"))
-            {
+            else if (rental.equals("$")) {
                 System.out.println("얼마를 충전 하시겠습니까?");
                 int income = sc.nextInt();
                 sc.nextLine();
                 if (income <= 0)
                     System.out.println("Error");
                 result = os.serviceMemincome(income, token);
-                System.out.println(result+"\n");
-            }
-            else
-            {
+                System.out.println(result + "\n");
+            } else {
                 result = os.serviceBookRental(Integer.parseInt(rental), token);
                 System.out.println(result);
             }
         }
     }
-    public String returnBook()
-    {
+
+    public String returnBook() {
         String result;
         System.out.println("반납하실 책의 바코드 또는 번호를 입력해주세요.");
         result = sc.nextLine();
