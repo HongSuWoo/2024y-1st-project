@@ -1,6 +1,5 @@
 package com.ohgiraffers.book.dao;
 
-
 import com.ohgiraffers.book.dto.BookDTO;
 import com.ohgiraffers.book.dto.MemberDTO;
 
@@ -10,7 +9,6 @@ import java.util.Scanner;
 public class MainRepository {
     private final ArrayList<MemberDTO> memberDB = new ArrayList<>();
     private final ArrayList<BookDTO> bookDB = new ArrayList<>();
-    String result = "";
     Scanner scanner = new Scanner(System.in);
 
 
@@ -30,7 +28,6 @@ public class MainRepository {
         MemberDTO members = this.memberDB.get(num);
         members.setMemberMoney(income);
         return members.toString() + "\n" + income + " 원이 충전 되었습니다.";
-
     }
 
     public String bookRental(int bookNum, int memNum) {
@@ -64,15 +61,14 @@ public class MainRepository {
     }
 
     public String registerMember(MemberDTO memberDTO) {
-        int oldnum = this.memberDB.size();
+        int oldNum = this.memberDB.size();
         this.memberDB.add(memberDTO);
-        System.out.println(oldnum);
         System.out.println(this.memberDB);
-        if (oldnum >= this.memberDB.size())
+        if (oldNum >= this.memberDB.size())
             return "등록실패";
         MemberDTO members;
-        members = memberDB.get(oldnum);
-        members.setMemberNum(oldnum);
+        members = memberDB.get(oldNum);
+        members.setMemberNum(oldNum);
         return "등록성공";
     }
 
@@ -81,24 +77,25 @@ public class MainRepository {
             MemberDTO member = this.memberDB.get(i);
             if (member.getMemberName().equals(data)) {
                 switch (sel) {
-                    case 1:
+                    case 1 -> {
                         member.setMemberName(data2);
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         member.setMemberAddress(data2);
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         member.setMemberPhone(data2);
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         member.setMemberGender(data2);
-                        break;
+                    }
+                    default -> {
+                        return member.toString();
+                    }
                 }
-                return member.toString();
             }
-
         }
-        return "Error";
+        return "올바른 값을 입력하세요.";
     }
 
     public String memDelete(int num) {
@@ -124,13 +121,13 @@ public class MainRepository {
 
 
     // bookService 관련 메서드  -----------------------------------------------------------------------------------------
-    public String selectBookPrint(String inputsel) {
+    public String selectBookPrint(String inputSel) {
         for (BookDTO book : this.bookDB)
-            if (book.getBookName().equals(inputsel))
+            if (book.getBookName().equals(inputSel))
                 return book.toString();
             else
                 return "없는 책 입니다.";
-        int num = Integer.parseInt(inputsel);
+        int num = Integer.parseInt(inputSel);
         if (num >= this.bookDB.size())
             return "없는 번호 입니다.";
         return this.bookDB.get(num).toString();
@@ -204,7 +201,4 @@ public class MainRepository {
         books.setBookRent(null);
         return books.getBookName() + " 이 반납되었습니다.";
     }
-
-
-    // MainRepository 관련 메서드  --------------------------------------------------------------------------------------
 }

@@ -3,10 +3,11 @@ package com.ohgiraffers.book.fakeDB;
 
 import com.ohgiraffers.book.dto.BookDTO;
 import com.ohgiraffers.book.dto.MemberDTO;
-import com.ohgiraffers.book.service.OrderService;
+import com.ohgiraffers.book.service.MainService;
 
 public class fakeDB {
-    OrderService orderService = new OrderService();
+    MainService orderService = new MainService();
+
     public void basicBookRegist() {
         String[] basicBook = new String[9];
         basicBook[0] = ("개미,베르나르,10000");

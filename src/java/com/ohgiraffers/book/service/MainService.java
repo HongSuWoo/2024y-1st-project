@@ -6,7 +6,7 @@ import com.ohgiraffers.book.dto.MemberDTO;
 
 import java.util.Scanner;
 
-public class OrderService {
+public class MainService {
     Scanner scanner = new Scanner(System.in);
     MainRepository mainRepository = new MainRepository();
 
@@ -34,23 +34,11 @@ public class OrderService {
         return mainRepository.registerMember(memberDTO);
     }
 
-    public String serviceMemModify(String name) {
-        System.out.println("수정을 원하시는 정보를 입력 해주세요. \nex)이름 or 주소 or  번호 or 성별");
-        String input = scanner.nextLine();
-        int modifyNum = 0;
-        if (input.equals("이름"))
-            modifyNum = 1;
-        else if (input.equals("주소"))
-            modifyNum = 2;
-        else if (input.equals("번호"))
-            modifyNum = 3;
-        else if (input.equals("성별"))
-            modifyNum = 4;
-        else
-            return "올바른 메뉴를 입력해 주세요.";
-        System.out.println("변경하실 정보를 입력해주세요.");
-        String inputInfo = scanner.nextLine();
-        return mainRepository.memModify(modifyNum, name, inputInfo);
+    public String serviceMemModify(String userName) {
+
+        memberModify(userName,"이름", "주소", "번호", "성별");
+
+        return "수정 완료";
     }
 
     public String serviceMemDelete(int sel) {
@@ -72,23 +60,14 @@ public class OrderService {
     }
 
     public String serviceModify(int sel) {
+        int modifyNum = 0;
+        String inputInfo = "";
         if (sel < 0)
-            return "일련번호는 음수가 될 수 없습니다.";
-        int num = 0;
-        System.out.println("수정을 원하시는 정보를 입력 해주세요. \nex) 제목 or 저자 or 가격");
-        String input = scanner.nextLine();
-        if (input.equals("제목"))
-            num = 1;
-        else if (input.equals("저자"))
-            num = 2;
-        else if (input.equals("가격"))
-            num = 3;
-        else
-            return "올바른 메뉴를 입력해 주세요.";
-        System.out.println("덮어쓸 정보를 입력해주세요.");
-        String input2 = scanner.nextLine();
+            return "도서 번호는 음수가 될 수 없습니다.";
 
-        return mainRepository.bookModify(sel, num, input2);
+        bookModify(sel,"제목","저자","가격");
+
+        return "수정 완료";
     }
 
     public String serviceDelete(int sel) {
@@ -106,5 +85,50 @@ public class OrderService {
     }
 
 
-    // OrderService 관련 메서드  ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
+    public void memberModify(String userName,String...name) {
+        System.out.println("수정을 원하시는 정보를 입력 해주세요.");
+        for (String info : name) {
+            System.out.print(info + "|");
+        }
+        System.out.print(" 입력: ");
+        String input = scanner.nextLine();
+        int modifyNum = -1;
+        for (int i = 0; i < name.length; i++) {
+            if (name[i].equals(input)) {
+                modifyNum = i + 1;
+                break;
+            }
+        }
+        if (modifyNum == -1) {
+            System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+        }
+
+        System.out.println("변경하실 정보를 입력해주세요.");
+        String inputInfo = scanner.nextLine();
+        mainRepository.memModify(modifyNum, userName, inputInfo);
+    }
+
+    public void bookModify(int sel,String...name) {
+        System.out.println("수정을 원하시는 정보를 입력 해주세요.");
+        for (String info : name) {
+            System.out.print(info + "|");
+        }
+        System.out.print(" 입력: ");
+        String input = scanner.nextLine();
+        int modifyNum = -1;
+        for (int i = 0; i < name.length; i++) {
+            if (name[i].equals(input)) {
+                modifyNum = i + 1;
+                break;
+            }
+        }
+        if (modifyNum == -1) {
+            System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+        }
+
+        System.out.println("변경하실 정보를 입력해주세요.");
+        String inputInfo = scanner.nextLine();
+        mainRepository.bookModify(sel, modifyNum, inputInfo);
+    }
 }

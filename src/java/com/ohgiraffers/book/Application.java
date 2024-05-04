@@ -1,15 +1,15 @@
 package com.ohgiraffers.book;
 
-import com.ohgiraffers.book.controller.OrderController;
+import com.ohgiraffers.book.controller.MainController;
 
 import java.util.InputMismatchException;
-
 import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) {
-        OrderController orderController = new OrderController();
+
+        MainController mainController = new MainController();
         Scanner scanner = new Scanner(System.in);
         boolean onIs = true;
         int input = 0;
@@ -30,29 +30,29 @@ public class Application {
             } catch (InputMismatchException e) {
                 System.out.println("오류! 숫자를 입력해주세요");
                 scanner.nextLine();
+                continue;
             }
 
             switch (input) {
                 case 1 -> {
                     System.out.print("회원이름을 입력 해주세요: ");
-                    orderController.rentalService();
+                    mainController.rentalService();
                 }
                 case 2 -> {
-                    orderController.memberService();
+                    mainController.memberService();
                 }
                 case 3 -> {
-                    orderController.bookService();
+                    mainController.bookService();
                 }
                 case 4 -> {
-                    orderController.returnBook();
+                    mainController.returnService();
                 }
                 case 9 -> {
                     onIs = false;
                 }
-                default -> {
-                    System.out.println("잘못된 입력입니다");
-                }
+                default -> System.out.println("잘못된 입력입니다.");
             }
         }
     }
 }
+// 이책을 누가 몇번 빌려갔는지

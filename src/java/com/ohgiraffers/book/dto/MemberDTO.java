@@ -17,7 +17,6 @@ public class MemberDTO {
         this.memberGender = memberGender;
     }
 
-
     // Getter & Setter ------------------------------------------------------------------------------------------------
     public int getMemberNum() {
         return memberNum;
@@ -79,13 +78,13 @@ public class MemberDTO {
     // toString -------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "회원정보 " + memberNum + " " +
-                "이름 = " + memberName +
-                " 주소 = " + memberAddress +
-                " 번호 = " + memberPhone +
-                " 대여목록 = " + memberRentalList +
-                " 성별 = " + memberGender +
-                " 금액 = " + memberMoney +
+        return "회원번호: " + memberNum +
+                " 이름: " + memberName +
+                " 주소: " + memberAddress +
+                " 번호: " + memberPhone +
+                " 대여목록: " + memberRentalList +
+                " 성별: " + memberGender +
+                " 잔액: " + memberMoney +
                 "\n";
     }
 }
