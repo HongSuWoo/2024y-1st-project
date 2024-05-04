@@ -1,4 +1,4 @@
-package dto;
+package com.ohgiraffers.book.dto;
 
 
 public class BookDTO {
@@ -8,10 +8,10 @@ public class BookDTO {
     private int bookPrice; //3
     private int bookCount; //
     private String bookRent; //
-    private int bookRentalCost;
+    private final int bookRentalCost;
 
-    int bookRentCost;
 
+    // BookDTO --------------------------------------------------------------------------------------------------------
     public BookDTO(String bookName, String bookAuthor, int bookPrice) {
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
@@ -20,13 +20,12 @@ public class BookDTO {
             this.bookRentalCost = 1000;
         else
             this.bookRentalCost = 400;
-
     }
 
+
+    // Getter & Setter ------------------------------------------------------------------------------------------------
     public void setBookNum(int num) {
-
         this.bookNum = num;
-
     }
 
     public String getBookName() {
@@ -73,6 +72,8 @@ public class BookDTO {
         return bookRentalCost;
     }
 
+
+    // toString -------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "도서 " +

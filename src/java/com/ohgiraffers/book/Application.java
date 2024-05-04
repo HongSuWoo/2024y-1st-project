@@ -1,4 +1,6 @@
-import controller.OrderController;
+package com.ohgiraffers.book;
+
+import com.ohgiraffers.book.controller.OrderController;
 
 import java.util.InputMismatchException;
 
@@ -13,7 +15,8 @@ public class Application {
         int input = 0;
 
         while (onIs) {
-            System.out.println("=======도서 관리 프로그램=======");
+
+            System.out.println("======= 도서 관리 프로그램 =======");
             System.out.println("1. 대   출");
             System.out.println("2. 회원관리");
             System.out.println("3. 도서관리");
@@ -25,7 +28,7 @@ public class Application {
                 input = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("숫자를 입력해주세요 !!!");
+                System.out.println("오류! 숫자를 입력해주세요");
                 scanner.nextLine();
             }
 
@@ -47,7 +50,7 @@ public class Application {
                     onIs = false;
                 }
                 default -> {
-                    System.out.println("잘못된 입력입니다!");
+                    System.out.println("잘못된 입력입니다");
                 }
             }
         }

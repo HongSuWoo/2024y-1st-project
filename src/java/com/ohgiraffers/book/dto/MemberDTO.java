@@ -1,29 +1,30 @@
-package dto;
+package com.ohgiraffers.book.dto;
 
 public class MemberDTO {
     private int memberNum;
+    private String memberName;
+    private String memberAddress;
+    private String memberPhone;
+    private String memberRentalList;
+    private String memberGender;
+    private int memberMoney;
 
+    // MemberDTO ------------------------------------------------------------------------------------------------------
+    public MemberDTO(String memberName, String memberAddress, String memberPhone, String memberGender) {
+        this.memberName = memberName;
+        this.memberAddress = memberAddress;
+        this.memberPhone = memberPhone;
+        this.memberGender = memberGender;
+    }
+
+
+    // Getter & Setter ------------------------------------------------------------------------------------------------
     public int getMemberNum() {
         return memberNum;
     }
 
     public void setMemberNum(int memberNum) {
         this.memberNum = memberNum;
-    }
-
-    private String memberName;
-    private String memberAdress;
-    private String memberPhone;
-    private String memberRentalList;
-    private String memberGender;
-    private int memberMoney;
-
-
-    public MemberDTO(String memberName, String memberAddress, String memberPhone, String memberGender) {
-        this.memberName = memberName;
-        this.memberAdress = memberAddress;
-        this.memberPhone = memberPhone;
-        this.memberGender = memberGender;
     }
 
     public String getMemberName() {
@@ -34,12 +35,12 @@ public class MemberDTO {
         this.memberName = memberName;
     }
 
-    public String getMemberAdress() {
-        return memberAdress;
+    public String getMemberAddress() {
+        return memberAddress;
     }
 
-    public void setMemberAdress(String memberAdress) {
-        this.memberAdress = memberAdress;
+    public void setMemberAddress(String memberAddress) {
+        this.memberAddress = memberAddress;
     }
 
     public String getMemberPhone() {
@@ -75,11 +76,12 @@ public class MemberDTO {
     }
 
 
+    // toString -------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "회원정보 " + memberNum + " " +
                 "이름 = " + memberName +
-                " 주소 = " + memberAdress +
+                " 주소 = " + memberAddress +
                 " 번호 = " + memberPhone +
                 " 대여목록 = " + memberRentalList +
                 " 성별 = " + memberGender +

@@ -1,8 +1,9 @@
-package fakeDB;
+package com.ohgiraffers.book.fakeDB;
 
-import dto.BookDTO;
-import dto.MemberDTO;
-import service.OrderService;
+
+import com.ohgiraffers.book.dto.BookDTO;
+import com.ohgiraffers.book.dto.MemberDTO;
+import com.ohgiraffers.book.service.OrderService;
 
 public class fakeDB {
     OrderService orderService = new OrderService();
@@ -25,7 +26,7 @@ public class fakeDB {
             int price = Integer.parseInt(bookData[2]);
 
             BookDTO bookDTO = new BookDTO(name, author, price);
-            orderService.serviceRegist(bookDTO);
+            orderService.serviceRegister(bookDTO);
         }
     }
 
@@ -48,7 +49,7 @@ public class fakeDB {
             String gender = memberData[3];
 
             MemberDTO memberDTO = new MemberDTO(name, address, phone, gender);
-            orderService.serviceMemRegist(memberDTO);
+            orderService.serviceMemRegister(memberDTO);
         }
     }
 }

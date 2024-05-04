@@ -1,7 +1,8 @@
-package dao;
+package com.ohgiraffers.book.dao;
 
-import dto.BookDTO;
-import dto.MemberDTO;
+
+import com.ohgiraffers.book.dto.BookDTO;
+import com.ohgiraffers.book.dto.MemberDTO;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,73 +13,23 @@ public class MainRepository {
     String result = "";
     Scanner scanner = new Scanner(System.in);
 
-    public String registerBook(BookDTO bookDTO) {
-        int oldnum = this.bookDB.size();
-        this.bookDB.add(bookDTO);
-        System.out.println(oldnum);
-        System.out.println(this.bookDB);
-        if (oldnum >= this.bookDB.size())
-            return "등록실패";
-        BookDTO book2;
-        book2 = bookDB.get(oldnum);
-        book2.setBookNum(oldnum);
-        return "등록성공";
-    }
 
-    public String bookOverPrint() {
-        if (bookDB.isEmpty()) {
-            return "등록된 책이 없습니다.";
-        }
-        String result = "";
-        for (BookDTO book : this.bookDB) {
-            result += book.toString();
-        }
+    // rentalService 관련 메서드 ----------------------------------------------------------------------------------------
+    public int memRental(String name) {
+        int result = -1;
+        for (MemberDTO member : this.memberDB)
+            if (member.getMemberName().equals(name)) {
+                result = member.getMemberNum();
+                System.out.println(member.toString());
+                return result;
+            }
         return result;
     }
 
-    public String selectBookPrint(String inputsel) {
-        for (BookDTO book : this.bookDB)
-            if (book.getBookName().equals(inputsel))
-                return book.toString();
-            else
-                return "없는 책 입니다.";
-        int num = Integer.parseInt(inputsel);
-        if (num >= this.bookDB.size())
-            return "없는 번호 입니다.";
-        return this.bookDB.get(num).toString();
-    }
-
-    public String bookDelete(int num) {
-        System.out.println(bookDB.get(num).toString() + " 얘를 진짜 지울래? -> true or false");
-        boolean select = scanner.nextBoolean();
-        if (!select)
-            return "삭제하지 않고 돌아갑니다.";
-        if (num < bookDB.size())
-            bookDB.remove(num);
-        else
-            return "Error";
-        return num + " 번이 삭제 되었습니다.";
-    }
-
-    public String bookModify(int num, int num2, String data) {
-        if (num < bookDB.size()) {
-            BookDTO books = bookDB.get(num);
-            switch (num2) {
-                case 1:
-                    books.setBookName(data);
-                    break;
-                case 2:
-                    books.setBookName(data);
-                    break;
-                case 3:
-                    books.setBookName(data);
-                    break;
-                default:
-                    return "잘못된 입력입니다.";
-            }
-            return bookDB.toString() + " 로 수정 되었습니다.";
-        } else
-            return "잘못된 입력입니다.";
+    public String trIncome(int income, int num) {
+        MemberDTO members = this.memberDB.get(num);
+        members.setMemberMoney(income);
+        return members.toString() + "\n" + income + " 원이 충전 되었습니다.";
 
     }
 
@@ -103,6 +54,15 @@ public class MainRepository {
         return members.getMemberName() + " 님에게 " + books.getBookName() + " 책 이 대여 되셨습니다.";
     }
 
+
+    // memberService 관련 메서드 ----------------------------------------------------------------------------------------
+    public String memSelectPrint(String data) {
+        for (MemberDTO member : this.memberDB)
+            if (member.getMemberName().equals(data))
+                return member.toString();
+        return "해당하는 멤버가 존재하지 않습니다.";
+    }
+
     public String registerMember(MemberDTO memberDTO) {
         int oldnum = this.memberDB.size();
         this.memberDB.add(memberDTO);
@@ -116,13 +76,6 @@ public class MainRepository {
         return "등록성공";
     }
 
-    public String memSelectPrint(String data) {
-        for (MemberDTO member : this.memberDB)
-            if (member.getMemberName().equals(data))
-                return member.toString();
-        return "해당하는 멤버가 존재하지 않습니다.";
-    }
-
     public String memModify(int sel, String data, String data2) {
         for (int i = 0; i < this.memberDB.size(); i++) {
             MemberDTO member = this.memberDB.get(i);
@@ -132,7 +85,7 @@ public class MainRepository {
                         member.setMemberName(data2);
                         break;
                     case 2:
-                        member.setMemberAdress(data2);
+                        member.setMemberAddress(data2);
                         break;
                     case 3:
                         member.setMemberPhone(data2);
@@ -169,22 +122,76 @@ public class MainRepository {
         return result;
     }
 
-    public int memRental(String name) {
-        int result = -1;
-        for (MemberDTO member : this.memberDB)
-            if (member.getMemberName().equals(name)) {
-                result = member.getMemberNum();
-                System.out.println(member.toString());
-                return result;
-            }
-        return result;
+
+    // bookService 관련 메서드  -----------------------------------------------------------------------------------------
+    public String selectBookPrint(String inputsel) {
+        for (BookDTO book : this.bookDB)
+            if (book.getBookName().equals(inputsel))
+                return book.toString();
+            else
+                return "없는 책 입니다.";
+        int num = Integer.parseInt(inputsel);
+        if (num >= this.bookDB.size())
+            return "없는 번호 입니다.";
+        return this.bookDB.get(num).toString();
     }
 
-    public String trincome(int income, int num) {
-        MemberDTO members = this.memberDB.get(num);
-        members.setMemberMoney(income);
-        return members.toString() + "\n" + income + " 원이 충전 되었습니다.";
+    public String registerBook(BookDTO bookDTO) {
+        int oldNum = this.bookDB.size();
+        this.bookDB.add(bookDTO);
+        System.out.println(oldNum);
+        System.out.println(this.bookDB);
+        if (oldNum >= this.bookDB.size())
+            return "등록실패";
+        BookDTO book2;
+        book2 = bookDB.get(oldNum);
+        book2.setBookNum(oldNum);
+        return "등록성공";
+    }
 
+    public String bookModify(int num, int num2, String data) {
+        if (num < bookDB.size()) {
+            BookDTO books = bookDB.get(num);
+            switch (num2) {
+                case 1:
+                    books.setBookName(data);
+                    break;
+                case 2:
+                    books.setBookAuthor(data);
+                    break;
+                case 3:
+                    books.setBookPrice(Integer.parseInt(data));
+                    break;
+                default:
+                    return "잘못된 입력입니다.";
+            }
+            return bookDB.toString() + " 로 수정 되었습니다.";
+        } else
+            return "잘못된 입력입니다.";
+
+    }
+
+    public String bookDelete(int num) {
+        System.out.println(bookDB.get(num).toString() + " 얘를 진짜 지울래? -> true or false");
+        boolean select = scanner.nextBoolean();
+        if (!select)
+            return "삭제하지 않고 돌아갑니다.";
+        if (num < bookDB.size())
+            bookDB.remove(num);
+        else
+            return "Error";
+        return num + " 번이 삭제 되었습니다.";
+    }
+
+    public String bookOverPrint() {
+        if (bookDB.isEmpty()) {
+            return "등록된 책이 없습니다.";
+        }
+        String result = "";
+        for (BookDTO book : this.bookDB) {
+            result += book.toString();
+        }
+        return result;
     }
 
     public String bookReturn(int bookNum) {
@@ -199,4 +206,5 @@ public class MainRepository {
     }
 
 
+    // MainRepository 관련 메서드  --------------------------------------------------------------------------------------
 }
