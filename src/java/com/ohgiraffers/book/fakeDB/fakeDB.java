@@ -27,7 +27,7 @@ public class fakeDB {
             int price = Integer.parseInt(bookData[2]);
 
             BookDTO bookDTO = new BookDTO(name, author, price);
-            orderService.serviceRegister(bookDTO);
+            orderService.serviceRegisterBook(bookDTO);
         }
     }
 
@@ -50,7 +50,7 @@ public class fakeDB {
             String gender = memberData[3];
 
             MemberDTO memberDTO = new MemberDTO(name, address, phone, gender);
-            orderService.serviceMemRegister(memberDTO);
+            orderService.serviceRegisterMember(memberDTO);
         }
     }
 }

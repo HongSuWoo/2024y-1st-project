@@ -9,6 +9,7 @@ public class MemberDTO {
     private String memberGender;
     private int memberMoney;
 
+
     // MemberDTO ------------------------------------------------------------------------------------------------------
     public MemberDTO(String memberName, String memberAddress, String memberPhone, String memberGender) {
         this.memberName = memberName;
@@ -16,6 +17,7 @@ public class MemberDTO {
         this.memberPhone = memberPhone;
         this.memberGender = memberGender;
     }
+
 
     // Getter & Setter ------------------------------------------------------------------------------------------------
     public int getMemberNum() {

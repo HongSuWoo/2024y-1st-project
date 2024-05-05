@@ -11,13 +11,14 @@ public class MainController {
     MainService mainService = new MainService();
     Scanner scanner = new Scanner(System.in);
 
-    // 대출 관련 메서드  -------------------------------------------------------------------------------------------------
+
+    // 대출 관련 메서드 --------------------------------------------------------------------------------------------------
     public void rentalService() {
         String result = "";
         int token, rental = 0, income = 0, bookNum = 0;
 
-        String memName = scanner.nextLine();
-        token = mainService.serviceRental(memName);
+        String memberName = scanner.nextLine();
+        token = mainService.serviceMemberNameVerification(memberName);
 
         if (token == -1) {
             System.out.println("등록되지 않은 회원입니다.");
@@ -46,7 +47,7 @@ public class MainController {
                     if (income <= 0) {
                         System.out.println("금액은 0보다 작거나 같을수 없습니다.");
                     } else {
-                        result = mainService.serviceMemberIncome(income, token);
+                        result = mainService.serviceChargeBalance(income, token);
                         System.out.println(result + "\n");
                     }
                 }
@@ -55,7 +56,8 @@ public class MainController {
         }
     }
 
-    // 회원 관련 메서드  -------------------------------------------------------------------------------------------------
+
+    // 회원 관련 메서드 --------------------------------------------------------------------------------------------------
     public void memberService() {
         int input = 0, inputNum = 0;
         String inputSel, memName, result = "";
@@ -68,17 +70,17 @@ public class MainController {
             case 1 -> {
                 System.out.println("검색하실 회원명을 입력 해주세요.");
                 inputSel = scanner.nextLine();
-                result = mainService.serviceMemberView(inputSel);
+                result = mainService.serviceSelectMemberPrint(inputSel);
             }
             case 2 -> {
                 String[] inputResult = requestInput("회원명", "주소", "전화번호", "성별");
                 MemberDTO memberDTO = new MemberDTO(inputResult[0], inputResult[1], inputResult[2], inputResult[3]);
-                result = mainService.serviceMemRegister(memberDTO);
+                result = mainService.serviceRegisterMember(memberDTO);
             }
             case 3 -> {
                 System.out.println("수정 하실 회원의 이름을 입력해주세요.");
                 memName = scanner.nextLine();
-                result = mainService.serviceMemModify(memName);
+                result = mainService.serviceMemberModify(memName);
             }
             case 4 -> {
                 System.out.println("삭제 하실 번호를 입력해주세요.");
@@ -89,10 +91,10 @@ public class MainController {
                     System.out.println("번호를 확인해 주세요.");
                     break;
                 }
-                result = mainService.serviceMemDelete(inputNum);
+                result = mainService.serviceMemberDelete(inputNum);
             }
             case 5 -> {
-                result = mainService.serviceMemOverPrint();
+                result = mainService.serviceAllMemberPrint();
             }
             case 9 -> {
                 result = "이전 메뉴로 돌아갑니다.";
@@ -103,10 +105,11 @@ public class MainController {
         System.out.println();
     }
 
-    // 도서관리 관련 메서드  ----------------------------------------------------------------------------------------------
+
+    // 도서관리 관련 메서드 -----------------------------------------------------------------------------------------------
     public void bookService() {
         int input = 0, inputNum = 0;
-        String inputSel, result = "";
+        String inputBookNumber, result = "";
 
         menuInterface("도서 검색", "도서 등록", "도서 수정", "도서 삭제", "전체 도서 조회", "이전 메뉴");
 
@@ -115,8 +118,8 @@ public class MainController {
         switch (input) {
             case 1 -> {
                 System.out.println("검색 하실 도서 번호나 도서 제목을 입력해주세요.");
-                inputSel = scanner.nextLine();
-                result = mainService.serviceView(inputSel);
+                inputBookNumber = scanner.nextLine();
+                result = mainService.serviceSelectBookPrint(inputBookNumber);
             }
             case 2 -> {
                 String[] inputResult = requestInput("도서 이름", "도서 저자");
@@ -129,7 +132,7 @@ public class MainController {
                     break;
                 }
                 BookDTO bookDTO = new BookDTO(inputResult[0], inputResult[1], input);
-                result = mainService.serviceRegister(bookDTO);
+                result = mainService.serviceRegisterBook(bookDTO);
             }
             case 3 -> {
                 System.out.println("수정 할 책의 번호 를 입력해주세요.");
@@ -140,7 +143,7 @@ public class MainController {
                     System.out.println("번호를 확인해 주세요.");
                     break;
                 }
-                result = mainService.serviceModify(inputNum);
+                result = mainService.serviceBookModify(inputNum);
             }
             case 4 -> {
                 System.out.println("삭제 하실 번호를 입력해주세요.");
@@ -151,10 +154,10 @@ public class MainController {
                     System.out.println("번호를 확인해 주세요.");
                     break;
                 }
-                result = mainService.serviceDelete(inputNum);
+                result = mainService.serviceBookDelete(inputNum);
             }
             case 5 -> {
-                result = mainService.serviceOverPrint();
+                result = mainService.serviceAllBookPrint();
             }
             case 9 -> {
                 result = "이전 메뉴로 돌아갑니다.";
@@ -165,10 +168,11 @@ public class MainController {
         System.out.println();
     }
 
-    // 반납 관련 메서드  -------------------------------------------------------------------------------------------------
+
+    // 반납 관련 메서드 --------------------------------------------------------------------------------------------------
     public void returnService() {
         String result = "";
-        int input = 0, bookNum = 0;
+        int input = 0, bookNumber = 0;
 
         System.out.println("1. 책번호 | 2. 바코드");
 
@@ -178,9 +182,9 @@ public class MainController {
             case 1 -> {
                 System.out.println("책의 번호를 입력해 주세요.");
 
-                bookNum = integerException(bookNum);
+                bookNumber = integerException(bookNumber);
 
-                result = mainService.serviceBookReturn(bookNum);
+                result = mainService.serviceBookReturn(bookNumber);
             }
             case 2 -> {
                 System.out.println("바코드 클래스 이행");
@@ -189,6 +193,8 @@ public class MainController {
         System.out.println(result);
     }
 
+
+    // MainController 관련 메서드 ---------------------------------------------------------------------------------------
     public void menuInterface(String menu1, String menu2, String menu3, String menu4, String menu5, String menu6) {
         System.out.println();
         System.out.println("======= 도서 관리 메뉴 =======");
