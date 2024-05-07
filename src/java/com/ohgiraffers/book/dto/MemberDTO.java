@@ -1,31 +1,31 @@
-package com.ohgiraffers.dto;
+package com.ohgiraffers.book.dto;
 
-public class MemberDTO
-{
+public class MemberDTO {
     private int memberNum;
-
-    public int getMemberNum() {
-        return memberNum;
-    }
-
-    public void setMemberNum(int memberNum) {
-        this.memberNum = memberNum;
-    }
-
     private String memberName;
-    private String memberAdress;
+    private String memberAddress;
     private String memberPhone;
     private String memberRentalList;
     private String memberGender;
     private int memberMoney;
 
 
-    public MemberDTO(String memberName, String memberAdress, String memberPhone, String memberGender)
-    {
+    // MemberDTO ------------------------------------------------------------------------------------------------------
+    public MemberDTO(String memberName, String memberAddress, String memberPhone, String memberGender) {
         this.memberName = memberName;
-        this.memberAdress = memberAdress;
+        this.memberAddress = memberAddress;
         this.memberPhone = memberPhone;
         this.memberGender = memberGender;
+    }
+
+
+    // Getter & Setter ------------------------------------------------------------------------------------------------
+    public int getMemberNum() {
+        return memberNum;
+    }
+
+    public void setMemberNum(int memberNum) {
+        this.memberNum = memberNum;
     }
 
     public String getMemberName() {
@@ -36,12 +36,12 @@ public class MemberDTO
         this.memberName = memberName;
     }
 
-    public String getMemberAdress() {
-        return memberAdress;
+    public String getMemberAddress() {
+        return memberAddress;
     }
 
-    public void setMemberAdress(String memberAdress) {
-        this.memberAdress = memberAdress;
+    public void setMemberAddress(String memberAddress) {
+        this.memberAddress = memberAddress;
     }
 
     public String getMemberPhone() {
@@ -77,15 +77,16 @@ public class MemberDTO
     }
 
 
+    // toString -------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "회원정보 " +memberNum +" "+
-                "이름 = " + memberName  +
-                " 주소 = " + memberAdress  +
-                " 번호 = " + memberPhone  +
-                " 대여목록 = " + memberRentalList  +
-                " 성별 = " + memberGender +
-                " 금액 = " + memberMoney +
+        return "회원번호: " + memberNum +
+                " 이름: " + memberName +
+                " 주소: " + memberAddress +
+                " 번호: " + memberPhone +
+                " 대여목록: " + memberRentalList +
+                " 성별: " + memberGender +
+                " 잔액: " + memberMoney +
                 "\n";
     }
 }
