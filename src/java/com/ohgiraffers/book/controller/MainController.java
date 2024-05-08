@@ -86,8 +86,8 @@ public class MainController {
                 System.out.println("삭제 하실 번호를 입력해주세요.");
 
                 inputNum = integerException(inputNum);
-
-                if (inputNum <= 0) {
+                System.out.println(inputNum);
+                if (inputNum < -1) { // 황정한이 수정함 0은 기본값이라 메서드가 넘어가지않아 -1로 수정
                     System.out.println("번호를 확인해 주세요.");
                     break;
                 }

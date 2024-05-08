@@ -1,11 +1,9 @@
 package com.ohgiraffers.book.fakeDB;
-
-
 import com.ohgiraffers.book.dto.BookDTO;
 import com.ohgiraffers.book.dto.MemberDTO;
 import com.ohgiraffers.book.service.MainService;
 
-public class fakeDB {
+public class FakeDB {
     MainService orderService = new MainService();
 
     public void basicBookRegist() {

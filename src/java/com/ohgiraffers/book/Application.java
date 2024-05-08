@@ -1,6 +1,7 @@
 package com.ohgiraffers.book;
 
 import com.ohgiraffers.book.controller.MainController;
+import com.ohgiraffers.book.fakeDB.FakeDB;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,6 +10,9 @@ public class Application {
 
     public static void main(String[] args) {
 
+        FakeDB fakeDB = new FakeDB();
+        fakeDB.basicBookRegist();
+        fakeDB.basicMemberRegist();
         MainController mainController = new MainController();
         Scanner scanner = new Scanner(System.in);
         boolean onIs = true;
